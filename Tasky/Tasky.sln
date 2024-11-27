@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tasky", "Tasky\Tasky.csproj", "{E5958DA7-5F05-4403-B68D-B6C7DC823598}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskyAPI", "TaskyAPI\TaskyAPI.csproj", "{CBE4664F-F6DC-4F2A-9DDA-B84563DE6C24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5958DA7-5F05-4403-B68D-B6C7DC823598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5958DA7-5F05-4403-B68D-B6C7DC823598}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5958DA7-5F05-4403-B68D-B6C7DC823598}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5958DA7-5F05-4403-B68D-B6C7DC823598}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBE4664F-F6DC-4F2A-9DDA-B84563DE6C24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBE4664F-F6DC-4F2A-9DDA-B84563DE6C24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBE4664F-F6DC-4F2A-9DDA-B84563DE6C24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBE4664F-F6DC-4F2A-9DDA-B84563DE6C24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
