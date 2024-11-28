@@ -1,10 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using TaskyAPI.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();/*.AddXmlSerializerFormatters();*/
+builder.Services.AddControllers().AddXmlSerializerFormatters();
+var connectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string"
+                                           + "'DefaultConnection' not found.");
+builder.Services.AddDbContext<TaskyAppDbContext>(options =>
+    options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
