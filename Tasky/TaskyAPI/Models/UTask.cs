@@ -29,6 +29,9 @@ public class UTask
     [Required]
     public int IdUser { get; set; }
     
+    [Required]
+    public Boolean IsPublic { get; set; }
+    
     [ForeignKey(nameof(IdUser))]
     public User TaskUser { get; set; }
     

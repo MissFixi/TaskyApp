@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskyAPI.Context;
 
@@ -11,9 +12,11 @@ using TaskyAPI.Context;
 namespace TaskyAPI.Migrations
 {
     [DbContext(typeof(TaskyAppDbContext))]
-    partial class TaskyAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241128181718_AddedIsPublicToTasks")]
+    partial class AddedIsPublicToTasks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

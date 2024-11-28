@@ -22,6 +22,9 @@ public class UTaskModel
     //public DateTime? EndDate { get; set; }
     
     [Required]
+    public Boolean IsPublic { get; set; }
+    
+    [Required]
     public int IdUser { get; set; }
 
 }
