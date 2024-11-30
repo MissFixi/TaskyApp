@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.IdentityModel.Tokens;
 using TaskyAPI.Context;
+using TaskyAPI.Migrations;
 using TaskyAPI.Models;
 using TaskyAPI.RequestModels;
 
@@ -20,6 +22,7 @@ public class TasksController : ControllerBase
         _context = context;
     }
 
+    //could be added custom format issue feedback
     [HttpPost]
     public async Task<IActionResult> AddNewTask(UTaskModel uTask)
     {
@@ -33,7 +36,6 @@ public class TasksController : ControllerBase
             IsPublic = uTask.IsPublic
         };
         
-        //check heading and description lenght, check priority
         var userExists = await _context.Users.AnyAsync(u => u.IdUser == newUTask.IdUser);
         
         if (!userExists)
@@ -49,35 +51,40 @@ public class TasksController : ControllerBase
     }
 
     
-    //might make it to be more optimized + add idUlient + check if public then edit
-    [HttpPut("{idTask:int}")]
-    public async Task<IActionResult> EndTask(int idTask, UTaskEndModel uTask)
+    // Finish your or public task
+    [HttpPut("{idUser:int}/{idTask:int}/finish")]
+    public async Task<IActionResult> FinishTask(int idUser, int idTask, UTaskEndModel uTask)
     {
-        var taskExists = await _context.Tasks.AnyAsync(t => t.IdTask == idTask);
+        var taskToFinish = await _context.Tasks.FindAsync(idTask);
 
-        if (!taskExists)
+        if (taskToFinish == null)
         {
             return BadRequest("Podane zadanie nie istnieje");
         }
+        
+        var doesUserExist = await _context.Users.AnyAsync(u => u.IdUser == idUser);
 
-        var isEnded = await _context.Tasks.AnyAsync(t => t.IdTask == idTask &&
-                                                         t.EndDate != null);
-        if (isEnded)
+        if (!doesUserExist)
+        {
+            return BadRequest("User o podanym id nie istnieje");
+        }
+        
+        if (taskToFinish.IsPublic == false && taskToFinish.IdUser != idUser)
+        {
+            return BadRequest("Nie masz uprawnień do usunięcia tego zadania");
+        }
+        
+        if (taskToFinish.EndDate != null)
         {
             return BadRequest("Zadanie jest już zakończone");
         }
 
-        var endDateIsProper = await _context.Tasks.AnyAsync(t => t.IdTask == idTask &&
-                                                                 t.StartDate < uTask.EndDate
-                                                                 && uTask.EndDate <= DateTime.Now);
-        if (!endDateIsProper)
+        if ((taskToFinish.StartDate > uTask.EndDate) || (uTask.EndDate >= DateTime.Now))
         {
             return BadRequest("Niepoprawna data zakończenia");
         }
 
-        var existingTask = await _context.Tasks.FirstAsync(t => t.IdTask == idTask);
-
-        existingTask.EndDate = uTask.EndDate;
+        taskToFinish.EndDate = uTask.EndDate;
         
         await _context.SaveChangesAsync();
         
@@ -89,6 +96,13 @@ public class TasksController : ControllerBase
     [HttpGet("{idUser:int}")]
     public async Task<IActionResult> ShowUserTasks(int idUser)
     {
+        var doesUserExist = await _context.Users.AnyAsync(u => u.IdUser == idUser);
+
+        if (!doesUserExist)
+        {
+            return BadRequest("User o podanym id nie istnieje");
+        }
+
         var areTasksAssigned = await _context.Tasks.AnyAsync(t => t.IdUser == idUser);
 
         if (!areTasksAssigned)
@@ -113,7 +127,6 @@ public class TasksController : ControllerBase
         return Ok(userTasks);
     }
     
-    //check public tasks
     [HttpGet("public")]
     public async Task<IActionResult> ShowPublicTasks()
     {
@@ -142,10 +155,18 @@ public class TasksController : ControllerBase
         return Ok(publicTasks);
     }
     
-    //check employees tasks + use function made for user before + change how UTasks show
+    //check employees tasks
+    //change how UTasks show
     [HttpGet("{idManager:int}/subordinates")]
     public async Task<IActionResult> ShowSubordinatesTasks(int idManager)
     {
+        var areTasksAssigned = await _context.Tasks.AnyAsync(t => t.TaskUser.IdManager == idManager);
+
+        if (!areTasksAssigned)
+        {
+            return BadRequest("Brak zadań do wyświetlenia");
+        }
+        
         var subordinatesTasks = await _context.Users
             .Where(u => u.IdManager == idManager)
             .Select(u => new
@@ -153,32 +174,16 @@ public class TasksController : ControllerBase
                 u.UTasks
             })
             .ToListAsync();
-
+        
         return Ok(subordinatesTasks);
 
     }
     
-    //delete task + do przemyslenia czy walidowac idusera
+    //delete task
+    //thinking about deleting user id validation
     [HttpDelete("{idTask:int}")]
     public async Task<IActionResult> DeleteTask(int idTask, int idUser)
     {
-        /*//bez walidacji
-        var taskToRemove = new UTask()
-        {
-            IdTask = idTask
-        };
-
-        _context.Tasks.Attach(taskToRemove);
-        
-        _context.Tasks.Remove(taskToRemove);*/
-        
-        /*var doesTaskExist = await _context.Tasks.AnyAsync(t => t.IdTask == idTask);
-        
-        if (!doesTaskExist)
-        {
-            return BadRequest("Zadanie o podanym id nie istnieje");
-        }*/
-        
         var taskToRemove = await _context.Tasks.FindAsync(idTask);
         
         if (taskToRemove == null)
@@ -193,22 +198,10 @@ public class TasksController : ControllerBase
             return BadRequest("User o podanym id nie istnieje");
         }
         
-        
-        /*var isAvailableForUser = await _context.Tasks.AnyAsync(t => t.IdUser == idUser ||
-                                                                    t.IsPublic == true);*/
         if (taskToRemove.IsPublic == false && taskToRemove.IdUser != idUser)
         {
             return BadRequest("Nie masz uprawnień do usunięcia tego zadania");
         }
-        /*if (!isAvailableForUser)
-        {
-            return BadRequest("Nie masz uprawnień do usunięcia tego zadania");
-        }*/
-        
-        /*var taskToRemove = new UTask()
-        {
-            IdTask = idTask
-        };*/
 
         _context.Tasks.Attach(taskToRemove);
 
@@ -220,6 +213,38 @@ public class TasksController : ControllerBase
     }
     
     //edit task
+    [HttpPut("{idUser:int}/{idTask:int}/edit")]
+    public async Task<IActionResult> EditTask(int idUser,int idTask, UTaskEditModel newTask)
+    {
+        var taskToEdit = await _context.Tasks.FindAsync(idTask);
+        
+        if (taskToEdit == null)
+        {
+            return BadRequest("Zadanie o podanym id nie istnieje");
+        }
+        
+        var doesUserExist = await _context.Users.AnyAsync(u => u.IdUser == idUser);
+
+        if (!doesUserExist)
+        {
+            return BadRequest("User o podanym id nie istnieje");
+        }
+        
+        if (taskToEdit.IsPublic == false && taskToEdit.IdUser != idUser)
+        {
+            return BadRequest("Nie masz uprawnień do usunięcia tego zadania");
+        }
+        
+        taskToEdit.Heading = newTask.Heading;
+        taskToEdit.Priority = newTask.Priority;
+        taskToEdit.Description = newTask.Description;
+        taskToEdit.IsPublic = newTask.IsPublic;
+        
+        await _context.SaveChangesAsync();
+        
+        return Ok();
+        
+    }
     
     //procedure to check statistics for manager
 }
