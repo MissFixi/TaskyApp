@@ -25,10 +25,11 @@ public class UTaskRepository : IUTaskRepository
         await _context.Tasks.AddAsync(uTask);
     }
 
-    public async Task<bool> DoesUserHavePermissionsAsync(int idUser, int idTask)
+    public async Task<bool> DoesUserHavePermissionAsync(int idUser, int idTask)
     {
-        return await _context.Tasks.AnyAsync(t => t.IdUser == idUser 
-                                                  || t.IsPublic == true);
+        return await _context.Tasks.AnyAsync(t => t.IdTask == idTask 
+                                                  && (t.IdUser == idUser 
+                                                  || t.IsPublic == true));
     }
 
     public async Task<bool> IsTaskFinishedAsync(int idTask)
@@ -39,12 +40,8 @@ public class UTaskRepository : IUTaskRepository
 
     public async Task<bool> IsEndDateCorrectAsync(DateTime dateTime, int idTask)
     {
-        /*return await _context.Tasks.AnyAsync(t => t.IdTask == idTask 
-                                                  && dateTime > t.StartDate 
-                                                  && dateTime < DateTime.Now);*/
         return await _context.Tasks.AnyAsync(t => t.IdTask == idTask
                                                   && dateTime > t.StartDate);
-
     }
 
     public async Task FinishTaskAsync(int idTask, DateTime time)
@@ -82,10 +79,30 @@ public class UTaskRepository : IUTaskRepository
         taskToEdit.Priority = uTask.Priority;
         taskToEdit.Description = uTask.Description;
         taskToEdit.IsPublic = uTask.IsPublic;
+        
     }
 
     public async Task SaveChangesAsyncAsync()
     {
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<UTask>> GetTasksForUserAsync(int idUser)
+    {
+        return await _context.Tasks
+            .Where(t => t.IdUser == idUser)
+            .ToListAsync();
+    }
+    
+    public async Task<List<UTask>> GetPublicTasksAsync()
+    {
+        return await _context.Tasks
+            .Where(t => t.IsPublic == true)
+            .ToListAsync();
+    }
+    
+    public async Task<UTask> GetTaskAsync(int idTask)
+    {
+        return await _context.Tasks.FindAsync(idTask);
     }
 }

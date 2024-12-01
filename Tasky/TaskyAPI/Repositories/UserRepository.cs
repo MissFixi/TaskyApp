@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TaskyAPI.Context;
+using TaskyAPI.Models;
 
 namespace TaskyAPI.Repositories;
 
@@ -21,4 +22,12 @@ public class UserRepository : IUserRepository
     {
         return await _context.Users.AnyAsync(u => u.IdManager == idUser);
     }
+    
+    public async Task<List<User>> GetSubordinatesAsync(int idManager)
+    {
+        return await _context.Users
+            .Where(u => u.IdManager == idManager)
+            .ToListAsync();
+    }
+    
 }

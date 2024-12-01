@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TaskyAPI.Context;
+using TaskyAPI.Repositories;
+using TaskyAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +16,9 @@ var connectionString =
                                            + "'DefaultConnection' not found.");
 builder.Services.AddDbContext<TaskyAppDbContext>(options =>
     options.UseSqlServer(connectionString));
-
+builder.Services.AddScoped<IUTaskService, UTaskService>();
+builder.Services.AddScoped<IUTaskRepository, UTaskRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

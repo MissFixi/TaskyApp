@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components.Forms;
 using TaskyAPI.Models;
 using TaskyAPI.Repositories;
 using TaskyAPI.RequestModels;
@@ -15,39 +16,185 @@ public class UTaskService : IUTaskService
         _taskRepository = uTaskRepository;
     }
 
-    public Task AddNewTask(UTaskModel uTask)
+    public async Task AddNewTask(UTaskModel uTask)
     {
-        throw new NotImplementedException();
+        var userExists = await _userRepository.DoesUserExistAsync(uTask.IdUser);
+        
+        if (!userExists)
+        {
+            throw new ArgumentException("Podany użytkownik nie istnieje");
+        }
+        
+        var newUTask = new UTask()
+        {
+            Heading = uTask.Heading,
+            Priority = uTask.Priority,
+            Description = uTask.Description,
+            StartDate = uTask.StartDate,
+            IdUser = uTask.IdUser,
+            IsPublic = uTask.IsPublic
+        };
+        
+        await _taskRepository.AddTaskAsync(newUTask);
+        await _taskRepository.SaveChangesAsyncAsync();
     }
 
-    public Task FinishTask(int idUser, int idTask, UTaskEndModel uTask)
+    public async Task FinishTask(int idUser, int idTask, UTaskEndModel uTask)
     {
-        throw new NotImplementedException();
+        var taskExists = await _taskRepository.DoesTaskExistAsync(idTask);
+        if (!taskExists)
+        {
+            throw new ArgumentException("Podane zadanie nie istnieje");
+        }
+        
+        var userExists = await _userRepository.DoesUserExistAsync(idUser);
+        if (!userExists)
+        {
+            throw new ArgumentException("Podany użytkownik nie istnieje");
+        }
+        
+        var userHasPermission = await _taskRepository.DoesUserHavePermissionAsync(idUser, idTask);
+        if (!userHasPermission)
+        {
+            throw new ArgumentException("Nie masz uprawnień do zakończenia tego zadania");
+        }
+        
+        var taskIsFinished = await _taskRepository.IsTaskFinishedAsync(idTask);
+        if (taskIsFinished)
+        {
+            throw new ArgumentException("Zadanie jest już zakończone");
+        }
+
+        var endDateIsCorrect = await _taskRepository.IsEndDateCorrectAsync(uTask.EndDate, idTask);
+        if (!endDateIsCorrect || uTask.EndDate > DateTime.Now)
+        {
+            throw new ArgumentException("Niepoprawna data zakończenia");
+        }
+
+        //change iduser 
+        await _taskRepository.FinishTaskAsync(idTask, uTask.EndDate);
+        
+        await _taskRepository.SaveChangesAsyncAsync();
     }
 
-    public Task<UTask> ShowUserTasks(int idUser)
+    public async Task<List<UTaskUserTasksModel>> ShowUserTasks(int idUser)
     {
-        throw new NotImplementedException();
+        var userExists = await _userRepository.DoesUserExistAsync(idUser);
+        if (!userExists)
+        {
+            throw new ArgumentException("Podany użytkownik nie istnieje");
+        }
+
+        var userHasTasksAssigned = await _taskRepository.DoesUserHaveAnyTaskAsync(idUser);
+        if (!userHasTasksAssigned)
+        {
+            throw new ArgumentException("Podany użytkownik nie posiada żadnych zadań");
+        }
+        
+        var userTasks = await _taskRepository.GetTasksForUserAsync(idUser);
+        return userTasks.Select(t => new UTaskUserTasksModel
+            {
+                IdTask = t.IdTask,
+                Heading = t.Heading,
+                Priority = t.Priority,
+                Description = t.Description,
+                StartDate = t.StartDate,
+                EndDate = t.EndDate,
+                IsPublic = t.IsPublic
+            }
+        ).ToList();
+
     }
 
-    public Task<UTask> ShowPublicTasks()
+    public async Task<List<UTaskPublicTasksModel>> ShowPublicTasks()
     {
-        throw new NotImplementedException();
+        var areAnyPublicTasks = await _taskRepository.AreAnyTasksPublicAsync();
+        if (!areAnyPublicTasks)
+        {
+            throw new Exception("Akualnie żaden użytkownik nie udostępnia swoich zadań");
+        }
+
+        var publicTasks = await _taskRepository.GetPublicTasksAsync();
+        return publicTasks.Select(t => new UTaskPublicTasksModel
+        {
+            IdTask = t.IdTask,
+            Heading = t.Heading,
+            Priority = t.Priority,
+            Description = t.Description,
+            StartDate = t.StartDate,
+            EndDate = t.EndDate,
+            /*FirstName = t.TaskUser.FirstName,
+            LastName = t.TaskUser.LastName*/
+        }).ToList();
+
     }
 
-    public Task<UTask> ShowSubordinatesTasks(int idManager)
+    public async Task<List<UTask>> ShowSubordinatesTasks(int idManager)
     {
-        throw new NotImplementedException();
+        var areTasksAssigned = await _taskRepository.AreAnyTasksAssignedToSubordinatesAsync(idManager);
+        if (!areTasksAssigned)
+        {
+            throw new Exception("Brak zadań do wyświetlenia");
+        }
+        
+        var subordinates = await _userRepository.GetSubordinatesAsync(idManager);
+        
+        return subordinates.Where(u => u.UTasks!=null).SelectMany(u => u.UTasks).ToList();
     }
 
-    public Task DeleteTask(int idTask, int idUser)
+    public async Task DeleteTask(int idTask, int idUser)
     {
-        throw new NotImplementedException();
+        var taskExists = await _taskRepository.DoesTaskExistAsync(idTask);
+        if (!taskExists)
+        {
+            throw new ArgumentException("Podane zadanie nie istnieje");
+        }
+        
+        var userExists = await _userRepository.DoesUserExistAsync(idUser);
+        if (!userExists)
+        {
+            throw new ArgumentException("Podany użytkownik nie istnieje");
+        }
+        
+        var userHasPermission = await _taskRepository.DoesUserHavePermissionAsync(idUser, idTask);
+        if (!userHasPermission)
+        {
+            throw new ArgumentException("Nie masz uprawnień do usunięcia tego zadania");
+        }
+
+        await _taskRepository.DeleteTaskAsync(idTask);
+        
+        await _taskRepository.SaveChangesAsyncAsync();
     }
 
-    public Task EditTask(int idUser, int idTask, UTaskEditModel newTask)
+    public async Task EditTask(int idUser, int idTask, UTaskEditModel newTask)
     {
-        throw new NotImplementedException();
+        var taskExists = await _taskRepository.DoesTaskExistAsync(idTask);
+        if (!taskExists)
+        {
+            throw new ArgumentException("Podane zadanie nie istnieje");
+        }
+        
+        var userExists = await _userRepository.DoesUserExistAsync(idUser);
+        if (!userExists)
+        {
+            throw new ArgumentException("Podany użytkownik nie istnieje");
+        }
+        
+        var userHasPermission = await _taskRepository.DoesUserHavePermissionAsync(idUser, idTask);
+        if (!userHasPermission)
+        {
+            throw new ArgumentException("Nie masz uprawnień do edytowania tego zadania");
+        }
+
+        var taskToEdit = await _taskRepository.GetTaskAsync(idTask);
+        taskToEdit.Heading = newTask.Heading;
+        taskToEdit.Priority = newTask.Priority;
+        taskToEdit.Description = newTask.Description;
+        taskToEdit.IsPublic = newTask.IsPublic;
+        
+        
+        await _taskRepository.SaveChangesAsyncAsync();
     }
 
     public Task<UTask> GetStatistics(int idManager)

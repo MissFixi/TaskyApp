@@ -21,5 +21,5 @@ public class User
     [ForeignKey(nameof(IdManager))]
     public User IdManagerId { get; set; }
     
-    public ICollection<UTask> UTasks { get; set; }
+    public ICollection<UTask>? UTasks { get; set; }
 }
