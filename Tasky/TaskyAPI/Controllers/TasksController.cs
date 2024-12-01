@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.IdentityModel.Tokens;
 using TaskyAPI.Context;
@@ -85,6 +86,10 @@ public class TasksController : ControllerBase
         }
 
         taskToFinish.EndDate = uTask.EndDate;
+        if (taskToFinish.IdUser != idUser)
+        {
+            taskToFinish.IdUser = idUser;
+        }
         
         await _context.SaveChangesAsync();
         
@@ -247,4 +252,9 @@ public class TasksController : ControllerBase
     }
     
     //procedure to check statistics for manager
+    [HttpGet("{idManager:int}")]
+    public async Task<IActionResult> getStatistics(int idManager)
+    {
+        return Ok();
+    }
 }
