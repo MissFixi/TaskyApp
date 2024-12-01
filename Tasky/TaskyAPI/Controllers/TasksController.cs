@@ -237,7 +237,7 @@ public class TasksController : ControllerBase
         
         if (taskToEdit.IsPublic == false && taskToEdit.IdUser != idUser)
         {
-            return BadRequest("Nie masz uprawnień do usunięcia tego zadania");
+            return BadRequest("Nie masz uprawnień do edytowania tego zadania");
         }
         
         taskToEdit.Heading = newTask.Heading;
@@ -252,8 +252,8 @@ public class TasksController : ControllerBase
     }
     
     //procedure to check statistics for manager
-    [HttpGet("{idManager:int}")]
-    public async Task<IActionResult> getStatistics(int idManager)
+    [HttpGet("{idManager:int}/statistics")]
+    public async Task<IActionResult> GetStatistics(int idManager)
     {
         return Ok();
     }
