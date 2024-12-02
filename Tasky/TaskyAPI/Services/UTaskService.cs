@@ -111,8 +111,9 @@ public class UTaskService : IUTaskService
         var areAnyPublicTasks = await _taskRepository.AreAnyTasksPublicAsync();
         if (!areAnyPublicTasks)
         {
-            throw new Exception("Akualnie żaden użytkownik nie udostępnia swoich zadań");
+            throw new ArgumentException("Akualnie żaden użytkownik nie udostępnia swoich zadań");
         }
+        
 
         var publicTasks = await _taskRepository.GetPublicTasksAsync();
         return publicTasks.Select(t => new UTaskPublicTasksModel
@@ -128,18 +129,39 @@ public class UTaskService : IUTaskService
         }).ToList();
 
     }
+    
 
-    public async Task<List<UTask>> ShowSubordinatesTasks(int idManager)
+    public async Task<List<UTaskSubordinatesModel>> ShowSubordinatesTasks(int idManager)
     {
+        var userExists = await _userRepository.DoesUserExistAsync(idManager);
+        if (!userExists)
+        {
+            throw new ArgumentException("Podany użytkownik nie istnieje");
+        }
+        
+        var userIsManager = await _userRepository.IsUserManagerAsync(idManager);
+        if (!userIsManager)
+        {
+            throw new ArgumentException("Podany użytkownik nie jest niczyim managerem");
+        }
+        
         var areTasksAssigned = await _taskRepository.AreAnyTasksAssignedToSubordinatesAsync(idManager);
         if (!areTasksAssigned)
         {
-            throw new Exception("Brak zadań do wyświetlenia");
+            throw new ArgumentException("Brak zadań do wyświetlenia");
         }
         
-        var subordinates = await _userRepository.GetSubordinatesAsync(idManager);
         
-        return subordinates.Where(u => u.UTasks!=null).SelectMany(u => u.UTasks).ToList();
+        var subordinates = await _userRepository.GetSubordinatesTasksAsync(idManager);
+        
+        /*var res = subordinates.Where(u => u.UTasks != null).SelectMany(u => u.UTasks).ToList();*/
+        return subordinates.Select(u => new UTaskSubordinatesModel
+        {
+            IdUser = u.IdUser,
+            FirstName = u.FirstName,
+            LastName = u.LastName,
+            UTasks = u.UTasks
+        }).ToList();
     }
 
     public async Task DeleteTask(int idTask, int idUser)
@@ -192,7 +214,6 @@ public class UTaskService : IUTaskService
         taskToEdit.Priority = newTask.Priority;
         taskToEdit.Description = newTask.Description;
         taskToEdit.IsPublic = newTask.IsPublic;
-        
         
         await _taskRepository.SaveChangesAsyncAsync();
     }

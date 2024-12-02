@@ -9,7 +9,7 @@ public interface IUTaskService
     Task FinishTask(int idUser, int idTask, UTaskEndModel uTask);
     Task<List<UTaskUserTasksModel>> ShowUserTasks(int idUser);
     Task<List<UTaskPublicTasksModel>> ShowPublicTasks();
-    Task<List<UTask>> ShowSubordinatesTasks(int idManager);
+    Task<List<UTaskSubordinatesModel>> ShowSubordinatesTasks(int idManager);
     Task DeleteTask(int idTask, int idUser);
     Task EditTask(int idUser, int idTask, UTaskEditModel newTask);
     Task<UTask> GetStatistics(int idManager);

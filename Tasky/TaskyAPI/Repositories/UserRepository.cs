@@ -30,4 +30,18 @@ public class UserRepository : IUserRepository
             .ToListAsync();
     }
     
+    public async Task<List<User>> GetSubordinatesTasksAsync(int idManager)
+    {
+        return await _context.Users
+            .Where(u => u.IdManager == idManager)
+            .Select(u => new User
+            {
+                IdUser = u.IdUser,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                UTasks = u.UTasks
+            })
+            .ToListAsync();
+    }
+    
 }
