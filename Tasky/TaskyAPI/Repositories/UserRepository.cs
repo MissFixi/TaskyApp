@@ -1,6 +1,8 @@
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using TaskyAPI.Context;
 using TaskyAPI.Models;
+using TaskyAPI.RequestModels;
 
 namespace TaskyAPI.Repositories;
 
@@ -42,6 +44,13 @@ public class UserRepository : IUserRepository
                 UTasks = u.UTasks
             })
             .ToListAsync();
+    }
+
+    public async Task<List<UTaskStatisticsModel>> GetStatisticsAsync(int idManager)
+    {
+        var IdManager = new SqlParameter("@Manager", idManager);
+
+        return await _context.Database.SqlQueryRaw<UTaskStatisticsModel>("EXEC getStatisticsForManager @Manager", IdManager).ToListAsync();
     }
     
 }

@@ -100,36 +100,12 @@ public class UTaskRepository : IUTaskRepository
             .Where(t => t.IsPublic == true)
             .ToListAsync();
     }
-
-    /*public async Task<List<UTask>> GetSubordinatesTasks(int idManager)
-    {
-        return await _context.Users
-            .Where(u => u.IdManager == idManager)
-            .Select(u => new
-            {
-                u.UTasks
-            })
-            .ToListAsync();
-    }*/
+    
 
     public async Task<UTask> GetTaskAsync(int idTask)
     {
         return await _context.Tasks.FindAsync(idTask);
     }
-    
-    /*public async Task<List<User>> GetSubordinatesTasksAsync(int idManager)
-    {
-        return await _context.Users
-            .Where(u => u.IdManager == idManager)
-            .Select(u => new User
-            {
-                IdUser = u.IdUser,
-                FirstName = u.FirstName,
-                LastName = u.LastName,
-                UTasks = u.UTasks
-            })
-            .ToListAsync();
-    }*/
     
     
     

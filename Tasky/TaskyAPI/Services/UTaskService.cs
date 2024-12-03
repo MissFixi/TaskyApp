@@ -218,8 +218,33 @@ public class UTaskService : IUTaskService
         await _taskRepository.SaveChangesAsyncAsync();
     }
 
-    public Task<UTask> GetStatistics(int idManager)
+    public async Task<List<UTaskStatisticsModel>> GetStatistics(int idManager)
     {
-        throw new NotImplementedException();
+        var userExists = await _userRepository.DoesUserExistAsync(idManager);
+        if (!userExists)
+        {
+            throw new ArgumentException("Podany użytkownik nie istnieje");
+        }
+        
+        var userIsManager = await _userRepository.IsUserManagerAsync(idManager);
+        if (!userIsManager)
+        {
+            throw new ArgumentException("Podany użytkownik nie jest niczyim managerem");
+        }
+        
+        var statistics = await _userRepository.GetStatisticsAsync(idManager);
+
+        return statistics;
+        /*var ids = statistics.Select(u => new UTaskStatisticsModel()
+        {
+            IdUser = u.IdUser
+        }).ToList();
+        return ids.Select(u => new UTaskStatisticsModel
+        {
+            Month = u.Month,
+            FirstName = u.FirstName,
+            LastName = u.LastName,
+            TasksCount = u.TasksCount
+        }).ToList();*/
     }
 }

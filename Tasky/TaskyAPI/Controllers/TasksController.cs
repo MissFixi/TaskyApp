@@ -135,9 +135,18 @@ public class TasksController : ControllerBase
     }
     
     //procedure to check statistics for manager
+    //change view (GROUPED BY MONTH)
     [HttpGet("{idManager:int}/statistics")]
     public async Task<IActionResult> GetStatistics(int idManager)
     {
-        return Ok();
+        try
+        {
+            var statistics = await _service.GetStatistics(idManager);
+            return Ok(statistics);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }

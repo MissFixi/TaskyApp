@@ -12,5 +12,5 @@ public interface IUTaskService
     Task<List<UTaskSubordinatesModel>> ShowSubordinatesTasks(int idManager);
     Task DeleteTask(int idTask, int idUser);
     Task EditTask(int idUser, int idTask, UTaskEditModel newTask);
-    Task<UTask> GetStatistics(int idManager);
+    Task<List<UTaskStatisticsModel>> GetStatistics(int idManager);
 }

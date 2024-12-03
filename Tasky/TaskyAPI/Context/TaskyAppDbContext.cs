@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using TaskyAPI.Models;
+using TaskyAPI.RequestModels;
 using Task = System.Threading.Tasks.Task;
 
 /*using TaskyAPI.Models;*/
@@ -19,7 +21,9 @@ public partial class TaskyAppDbContext : DbContext
         : base(options)
     {
     }
- 
+    
     public DbSet<User> Users { get; set; }
     public DbSet<UTask> Tasks { get; set; }
+    
+    
 }
