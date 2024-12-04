@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "/zzAPzWX1oBQLdUSqXtdgmTF6qZkflAkXlT2G8wyfo8=",
+  "Hash": "CMiwfuuc7pmuLPHDBtuACZFSw8g7e44kHfHkwIXSKWM=",
   "Source": "TaskyAPI",
   "BasePath": "_content/TaskyAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

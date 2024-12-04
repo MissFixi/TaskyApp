@@ -21,7 +21,16 @@ public partial class TaskyAppDbContext : DbContext
         : base(options)
     {
     }
-    
+
+    //Added for WinForms tests -> should be made in safier way
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer("Server=(localdb)\\Local;Database=TaskyAppDB;Trusted_Connection=True;");
+        }
+    }
+
     public DbSet<User> Users { get; set; }
     public DbSet<UTask> Tasks { get; set; }
     

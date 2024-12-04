@@ -21,4 +21,14 @@
       </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TaskyAPI\TaskyAPI.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Forms\Start.cs">
+        <SubType>Form</SubType>
+      </Compile>
+    </ItemGroup>
+
 </Project>

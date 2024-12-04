@@ -168,3 +168,7 @@ C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\TaskyAPI\obj\Debug\n
 C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\TaskyAPI\obj\Debug\net8.0\TaskyAPI.pdb
 C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\TaskyAPI\obj\Debug\net8.0\TaskyAPI.genruntimeconfig.cache
 C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\TaskyAPI\obj\Debug\net8.0\ref\TaskyAPI.dll
+C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\TaskyAPI\bin\Debug\net8.0\TaskyAPI.staticwebassets.endpoints.json
+C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\TaskyAPI\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\TaskyAPI\obj\Debug\net8.0\staticwebassets\msbuild.TaskyAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\TaskyAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

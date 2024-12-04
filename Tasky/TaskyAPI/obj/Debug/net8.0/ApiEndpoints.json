@@ -1,0 +1,149 @@
+[
+  {
+    "ContainingType": "TaskyAPI.Controllers.TasksController",
+    "Method": "AddNewTask",
+    "RelativePath": "api/tasks",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "uTask",
+        "Type": "TaskyAPI.RequestModels.UTaskModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskyAPI.Controllers.TasksController",
+    "Method": "GetStatistics",
+    "RelativePath": "api/tasks/{idManager}/statistics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idManager",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskyAPI.Controllers.TasksController",
+    "Method": "ShowSubordinatesTasks",
+    "RelativePath": "api/tasks/{idManager}/subordinates",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idManager",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskyAPI.Controllers.TasksController",
+    "Method": "DeleteTask",
+    "RelativePath": "api/tasks/{idTask}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idTask",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "idUser",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskyAPI.Controllers.TasksController",
+    "Method": "ShowUserTasks",
+    "RelativePath": "api/tasks/{idUser}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idUser",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskyAPI.Controllers.TasksController",
+    "Method": "EditTask",
+    "RelativePath": "api/tasks/{idUser}/{idTask}/edit",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idUser",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "idTask",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newTask",
+        "Type": "TaskyAPI.RequestModels.UTaskEditModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskyAPI.Controllers.TasksController",
+    "Method": "FinishTask",
+    "RelativePath": "api/tasks/{idUser}/{idTask}/finish",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idUser",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "idTask",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "uTask",
+        "Type": "TaskyAPI.RequestModels.UTaskEndModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskyAPI.Controllers.TasksController",
+    "Method": "ShowPublicTasks",
+    "RelativePath": "api/tasks/public",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
