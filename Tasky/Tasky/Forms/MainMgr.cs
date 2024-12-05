@@ -11,15 +11,15 @@ using Tasky.Objects;
 using TaskyAPI.Repositories;
 using TaskyAPI.Services;
 
-namespace Tasky
+namespace Tasky.Forms
 {
-    public partial class MainEmployee : Form
+    public partial class MainMgr : Form
     {
         private Employee employee;
         private readonly IUTaskService _service;
         private readonly IUTaskRepository _tasksRepository;
         private readonly IUserRepository _userRepository;
-        public MainEmployee(Employee employee, IUTaskRepository uTaskRepository, IUserRepository userRepository, IUTaskService uTaskService)
+        public MainMgr(Employee employee, IUTaskRepository uTaskRepository, IUserRepository userRepository, IUTaskService uTaskService)
         {
             this.employee = employee;
             _tasksRepository = uTaskRepository;

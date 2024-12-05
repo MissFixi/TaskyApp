@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\MissF\\Documents\\portfolio\\Tasky\\app\\TaskyApp\\Tasky\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E5958DA7-5F05-4403-B68D-B6C7DC823598}|Tasky\\Tasky.csproj|c:\\users\\missf\\documents\\portfolio\\tasky\\app\\taskyapp\\tasky\\tasky\\forms\\start.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5958DA7-5F05-4403-B68D-B6C7DC823598}|Tasky\\Tasky.csproj|solutionrelative:tasky\\forms\\start.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5958DA7-5F05-4403-B68D-B6C7DC823598}|Tasky\\Tasky.csproj|c:\\users\\missf\\documents\\portfolio\\tasky\\app\\taskyapp\\tasky\\tasky\\forms\\mainmgr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5958DA7-5F05-4403-B68D-B6C7DC823598}|Tasky\\Tasky.csproj|solutionrelative:tasky\\forms\\mainmgr.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5958DA7-5F05-4403-B68D-B6C7DC823598}|Tasky\\Tasky.csproj|c:\\users\\missf\\documents\\portfolio\\tasky\\app\\taskyapp\\tasky\\tasky\\forms\\mainemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5958DA7-5F05-4403-B68D-B6C7DC823598}|Tasky\\Tasky.csproj|solutionrelative:tasky\\forms\\mainemployee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E5958DA7-5F05-4403-B68D-B6C7DC823598}|Tasky\\Tasky.csproj|c:\\users\\missf\\documents\\portfolio\\tasky\\app\\taskyapp\\tasky\\tasky\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E5958DA7-5F05-4403-B68D-B6C7DC823598}|Tasky\\Tasky.csproj|solutionrelative:tasky\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -14,17 +26,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainMgr.cs",
+              "DocumentMoniker": "C:\\Users\\MissF\\Documents\\portfolio\\Tasky\\app\\TaskyApp\\Tasky\\Tasky\\Forms\\MainMgr.cs",
+              "RelativeDocumentMoniker": "Tasky\\Forms\\MainMgr.cs",
+              "ToolTip": "C:\\Users\\MissF\\Documents\\portfolio\\Tasky\\app\\TaskyApp\\Tasky\\Tasky\\Forms\\MainMgr.cs",
+              "RelativeToolTip": "Tasky\\Forms\\MainMgr.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAArwBUAAABtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T10:46:17.81Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainEmployee.cs",
+              "DocumentMoniker": "C:\\Users\\MissF\\Documents\\portfolio\\Tasky\\app\\TaskyApp\\Tasky\\Tasky\\Forms\\MainEmployee.cs",
+              "RelativeDocumentMoniker": "Tasky\\Forms\\MainEmployee.cs",
+              "ToolTip": "C:\\Users\\MissF\\Documents\\portfolio\\Tasky\\app\\TaskyApp\\Tasky\\Tasky\\Forms\\MainEmployee.cs",
+              "RelativeToolTip": "Tasky\\Forms\\MainEmployee.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAArwBUAAAByAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T10:32:49.619Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Start.cs",
+              "DocumentMoniker": "C:\\Users\\MissF\\Documents\\portfolio\\Tasky\\app\\TaskyApp\\Tasky\\Tasky\\Forms\\Start.cs",
+              "RelativeDocumentMoniker": "Tasky\\Forms\\Start.cs",
+              "ToolTip": "C:\\Users\\MissF\\Documents\\portfolio\\Tasky\\app\\TaskyApp\\Tasky\\Tasky\\Forms\\Start.cs",
+              "RelativeToolTip": "Tasky\\Forms\\Start.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAADQAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-05T10:32:57.231Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\MissF\\Documents\\portfolio\\Tasky\\app\\TaskyApp\\Tasky\\Tasky\\Program.cs",
               "RelativeDocumentMoniker": "Tasky\\Program.cs",
               "ToolTip": "C:\\Users\\MissF\\Documents\\portfolio\\Tasky\\app\\TaskyApp\\Tasky\\Tasky\\Program.cs",
               "RelativeToolTip": "Tasky\\Program.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAABkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T22:16:52.576Z",
               "EditorCaption": ""

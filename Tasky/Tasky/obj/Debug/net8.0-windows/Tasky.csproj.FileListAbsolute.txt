@@ -155,3 +155,4 @@ C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\bin\Debug\net8
 C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\bin\Debug\net8.0-windows\TaskyAPI.dll
 C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\bin\Debug\net8.0-windows\TaskyAPI.pdb
 C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\obj\Debug\net8.0-windows\Tasky.MainEmployee.resources
+C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\obj\Debug\net8.0-windows\Tasky.Forms.MainMgr.resources

@@ -5,6 +5,7 @@ using TaskyAPI.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.InteropServices;
 using Tasky.Objects;
+using Tasky.Forms;
 
 namespace Tasky;
 
@@ -15,13 +16,12 @@ public partial class Start : Form
     private readonly IUserRepository _userRepository;
     private Employee employee;
     
-    public Start()
+    public Start(IUTaskRepository uTaskRepository, IUserRepository userRepository, IUTaskService uTaskService)
     {
+        _tasksRepository = uTaskRepository;
+        _userRepository = userRepository;
+        _service = uTaskService;
         InitializeComponent();
-        var TaskyDbContext = new TaskyAppDbContext();
-        _tasksRepository = new UTaskRepository(TaskyDbContext);
-        _userRepository = new UserRepository(TaskyDbContext);
-        _service = new UTaskService(_tasksRepository, _userRepository);
     }
 
     //should be started by Enter on idTextBox
@@ -40,6 +40,16 @@ public partial class Start : Form
             else
             {
                 employee = new Employee(idUser);
+                if (await employee.IsMgr((UserRepository)_userRepository))
+                {
+                    this.Hide();
+                    new MainMgr(employee, _tasksRepository, _userRepository, _service).ShowDialog();
+                }
+                else
+                {
+                    this.Hide();
+                    new MainEmployee(employee, _tasksRepository, _userRepository, _service).ShowDialog();
+                }
             }
 
         }

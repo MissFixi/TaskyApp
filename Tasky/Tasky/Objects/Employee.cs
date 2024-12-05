@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskyAPI.Repositories;
 
 namespace Tasky.Objects;
 public class Employee
@@ -14,6 +15,12 @@ public class Employee
     {
         this.idEmployee = idEmployee;
         isManager = false;
+    }
+
+    public async Task<bool> IsMgr(UserRepository userRepository)
+    {
+        isManager = await userRepository.IsUserManagerAsync(this.idEmployee);
+        return isManager;
     }
 
 }
