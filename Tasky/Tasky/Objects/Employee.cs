@@ -23,6 +23,11 @@ public class Employee
         return isManager;
     }
 
+    public int getId()
+    {
+        return idEmployee;
+    }
+
 }
     
     

@@ -154,7 +154,6 @@ public class UTaskService : IUTaskService
         
         var subordinates = await _userRepository.GetSubordinatesTasksAsync(idManager);
         
-        /*var res = subordinates.Where(u => u.UTasks != null).SelectMany(u => u.UTasks).ToList();*/
         return subordinates.Select(u => new UTaskSubordinatesModel
         {
             IdUser = u.IdUser,
@@ -235,16 +234,5 @@ public class UTaskService : IUTaskService
         var statistics = await _userRepository.GetStatisticsAsync(idManager);
 
         return statistics;
-        /*var ids = statistics.Select(u => new UTaskStatisticsModel()
-        {
-            IdUser = u.IdUser
-        }).ToList();
-        return ids.Select(u => new UTaskStatisticsModel
-        {
-            Month = u.Month,
-            FirstName = u.FirstName,
-            LastName = u.LastName,
-            TasksCount = u.TasksCount
-        }).ToList();*/
     }
 }
