@@ -1,4 +1,4 @@
-# **TaskyApp **
+# TaskyApp
 Added FirstName and LastName to User class for future tests.<br>
 Assumed that Users should be added to database.<br>
 Tasks priority is in range 1-5 where higher number means higher priority.<br>
