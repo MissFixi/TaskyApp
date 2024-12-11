@@ -86,7 +86,6 @@ public class TasksController : ControllerBase
     }
     
     //check employees tasks
-    //change how UTasks show
     [HttpGet("{idManager:int}/subordinates")]
     public async Task<IActionResult> ShowSubordinatesTasks(int idManager)
     {
@@ -103,7 +102,6 @@ public class TasksController : ControllerBase
     }
     
     //delete task
-    //thinking about deleting user id validation
     [HttpDelete("{idTask:int}")]
     public async Task<IActionResult> DeleteTask(int idTask, int idUser)
     {
@@ -135,7 +133,6 @@ public class TasksController : ControllerBase
     }
     
     //procedure to check statistics for manager
-    //change view (GROUPED BY MONTH)
     [HttpGet("{idManager:int}/statistics")]
     public async Task<IActionResult> GetStatistics(int idManager)
     {

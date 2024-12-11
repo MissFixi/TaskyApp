@@ -158,3 +158,6 @@ C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\obj\Debug\net8
 C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\obj\Debug\net8.0-windows\Tasky.Forms.MainMgr.resources
 C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\obj\Debug\net8.0-windows\Tasky.Properties.Resources.resources
 C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\obj\Debug\net8.0-windows\Tasky.Forms.AddTaskForm.resources
+C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\obj\Debug\net8.0-windows\Tasky.Forms.DeleteTaskForm.resources
+C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\obj\Debug\net8.0-windows\Tasky.Forms.EditTaskForm.resources
+C:\Users\MissF\Documents\portfolio\Tasky\app\TaskyApp\Tasky\Tasky\obj\Debug\net8.0-windows\Tasky.Forms.FinishTaskForm.resources
