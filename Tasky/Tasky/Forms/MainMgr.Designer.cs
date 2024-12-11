@@ -36,17 +36,26 @@
             TaskPriority = new ColumnHeader();
             StartDate = new ColumnHeader();
             EndDate = new ColumnHeader();
-            IsPublic = new ColumnHeader();
+            Type = new ColumnHeader();
             statisticsButton = new Button();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            buttonAddTask = new Button();
+            buttonDeleteTask = new Button();
+            buttonEditTask = new Button();
+            buttonFinishTask = new Button();
+            bottomLabel = new Label();
+            welcomeLabel = new Label();
+            signOutLabel = new Label();
             SuspendLayout();
             // 
             // userTasksListView
             // 
-            userTasksListView.Anchor = AnchorStyles.None;
-            userTasksListView.Columns.AddRange(new ColumnHeader[] { IdUser, FirstName, LastName, TaskHeading, TaskPriority, StartDate, EndDate, IsPublic });
-            userTasksListView.Location = new Point(641, 249);
+            userTasksListView.Columns.AddRange(new ColumnHeader[] { IdUser, FirstName, LastName, TaskHeading, TaskPriority, StartDate, EndDate, Type });
+            userTasksListView.Location = new Point(279, 70);
             userTasksListView.Name = "userTasksListView";
-            userTasksListView.Size = new Size(1402, 864);
+            userTasksListView.Size = new Size(1048, 680);
             userTasksListView.TabIndex = 0;
             userTasksListView.UseCompatibleStateImageBehavior = false;
             userTasksListView.View = View.Details;
@@ -55,7 +64,7 @@
             // 
             IdUser.Tag = "IdUser";
             IdUser.Text = "IdUser";
-            IdUser.Width = 50;
+            IdUser.Width = 70;
             // 
             // FirstName
             // 
@@ -79,47 +88,166 @@
             // 
             TaskPriority.Tag = "TaskPriority";
             TaskPriority.Text = "TaskPriority";
-            TaskPriority.Width = 70;
+            TaskPriority.Width = 110;
             // 
             // StartDate
             // 
             StartDate.Tag = "StartDate";
             StartDate.Text = "StartDate";
-            StartDate.Width = 120;
+            StartDate.Width = 110;
             // 
             // EndDate
             // 
             EndDate.Tag = "EndDate";
             EndDate.Text = "EndDate";
-            EndDate.Width = 160;
+            EndDate.Width = 110;
             // 
-            // IsPublic
+            // Type
             // 
-            IsPublic.Tag = "IsPublic";
-            IsPublic.Text = "IsPublic";
-            IsPublic.Width = 120;
+            Type.Tag = "Type";
+            Type.Text = "Type";
+            Type.Width = 120;
             // 
             // statisticsButton
             // 
-            statisticsButton.Location = new Point(224, 249);
+            statisticsButton.Font = new Font("Segoe UI", 14F);
+            statisticsButton.Location = new Point(12, 168);
             statisticsButton.Name = "statisticsButton";
-            statisticsButton.Size = new Size(241, 67);
+            statisticsButton.Size = new Size(261, 61);
             statisticsButton.TabIndex = 1;
             statisticsButton.Text = "Show statistics";
             statisticsButton.UseVisualStyleBackColor = true;
             statisticsButton.Click += button1_Click;
             // 
+            // button1
+            // 
+            button1.Font = new Font("Segoe UI", 14F);
+            button1.Location = new Point(12, 70);
+            button1.Name = "button1";
+            button1.Size = new Size(261, 92);
+            button1.TabIndex = 2;
+            button1.Text = "Show subordinates tasks";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Segoe UI", 14F);
+            button2.Location = new Point(12, 235);
+            button2.Name = "button2";
+            button2.Size = new Size(261, 61);
+            button2.TabIndex = 3;
+            button2.Text = "Show your tasks";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Font = new Font("Segoe UI", 14F);
+            button3.Location = new Point(12, 302);
+            button3.Name = "button3";
+            button3.Size = new Size(261, 61);
+            button3.TabIndex = 4;
+            button3.Text = "Show public tasks";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddTask
+            // 
+            buttonAddTask.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            buttonAddTask.Location = new Point(12, 369);
+            buttonAddTask.Name = "buttonAddTask";
+            buttonAddTask.Size = new Size(261, 61);
+            buttonAddTask.TabIndex = 6;
+            buttonAddTask.Text = "+ Add new task";
+            buttonAddTask.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteTask
+            // 
+            buttonDeleteTask.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            buttonDeleteTask.Location = new Point(12, 436);
+            buttonDeleteTask.Name = "buttonDeleteTask";
+            buttonDeleteTask.Size = new Size(261, 61);
+            buttonDeleteTask.TabIndex = 7;
+            buttonDeleteTask.Text = "- Delete task";
+            buttonDeleteTask.UseVisualStyleBackColor = true;
+            // 
+            // buttonEditTask
+            // 
+            buttonEditTask.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            buttonEditTask.Location = new Point(12, 503);
+            buttonEditTask.Name = "buttonEditTask";
+            buttonEditTask.Size = new Size(261, 61);
+            buttonEditTask.TabIndex = 9;
+            buttonEditTask.Text = "Edit task";
+            buttonEditTask.UseVisualStyleBackColor = true;
+            // 
+            // buttonFinishTask
+            // 
+            buttonFinishTask.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            buttonFinishTask.Location = new Point(12, 570);
+            buttonFinishTask.Name = "buttonFinishTask";
+            buttonFinishTask.Size = new Size(261, 61);
+            buttonFinishTask.TabIndex = 10;
+            buttonFinishTask.Text = "Finish task";
+            buttonFinishTask.UseVisualStyleBackColor = true;
+            // 
+            // bottomLabel
+            // 
+            bottomLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            bottomLabel.AutoSize = true;
+            bottomLabel.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            bottomLabel.Location = new Point(1205, 807);
+            bottomLabel.Name = "bottomLabel";
+            bottomLabel.Size = new Size(122, 21);
+            bottomLabel.TabIndex = 11;
+            bottomLabel.Text = "TaskyApp ver0.1";
+            // 
+            // welcomeLabel
+            // 
+            welcomeLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            welcomeLabel.AutoSize = true;
+            welcomeLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            welcomeLabel.Location = new Point(1077, 9);
+            welcomeLabel.MinimumSize = new Size(250, 0);
+            welcomeLabel.Name = "welcomeLabel";
+            welcomeLabel.Size = new Size(250, 30);
+            welcomeLabel.TabIndex = 12;
+            welcomeLabel.Text = "Welcome User";
+            welcomeLabel.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // signOutLabel
+            // 
+            signOutLabel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            signOutLabel.AutoSize = true;
+            signOutLabel.Font = new Font("Segoe UI", 10F);
+            signOutLabel.Location = new Point(1241, 39);
+            signOutLabel.Name = "signOutLabel";
+            signOutLabel.RightToLeft = RightToLeft.Yes;
+            signOutLabel.Size = new Size(86, 28);
+            signOutLabel.TabIndex = 13;
+            signOutLabel.Text = "Sign out";
+            // 
             // MainMgr
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2787, 1343);
+            ClientSize = new Size(1339, 837);
+            Controls.Add(signOutLabel);
+            Controls.Add(welcomeLabel);
+            Controls.Add(bottomLabel);
+            Controls.Add(buttonFinishTask);
+            Controls.Add(buttonEditTask);
+            Controls.Add(buttonDeleteTask);
+            Controls.Add(buttonAddTask);
+            Controls.Add(button3);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(statisticsButton);
             Controls.Add(userTasksListView);
+            MinimumSize = new Size(1361, 841);
             Name = "MainMgr";
-            Text = "MainMgr";
+            Text = "Tasky";
             WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -132,7 +260,17 @@
         private ColumnHeader TaskPriority;
         private ColumnHeader StartDate;
         private ColumnHeader EndDate;
-        private ColumnHeader IsPublic;
+        private ColumnHeader Type;
         private Button statisticsButton;
+        private Button button1;
+        private Button button2;
+        private Button button3;
+        private Button buttonAddTask;
+        private Button buttonDeleteTask;
+        private Button buttonEditTask;
+        private Button buttonFinishTask;
+        private Label bottomLabel;
+        private Label welcomeLabel;
+        private Label signOutLabel;
     }
 }

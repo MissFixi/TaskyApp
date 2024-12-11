@@ -40,27 +40,32 @@ partial class Start
         // idTextBox
         // 
         idTextBox.Anchor = AnchorStyles.None;
-        idTextBox.Location = new Point(343, 179);
+        idTextBox.BackColor = SystemColors.Window;
+        idTextBox.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        idTextBox.ForeColor = SystemColors.WindowText;
+        idTextBox.Location = new Point(329, 176);
         idTextBox.Name = "idTextBox";
-        idTextBox.Size = new Size(150, 31);
+        idTextBox.Size = new Size(176, 45);
         idTextBox.TabIndex = 0;
         // 
         // label1
         // 
         label1.Anchor = AnchorStyles.None;
         label1.AutoSize = true;
-        label1.Location = new Point(312, 182);
+        label1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        label1.Location = new Point(273, 179);
         label1.Name = "label1";
-        label1.Size = new Size(34, 25);
+        label1.Size = new Size(50, 38);
         label1.TabIndex = 1;
         label1.Text = "ID:";
         // 
         // signInButton
         // 
         signInButton.Anchor = AnchorStyles.None;
-        signInButton.Location = new Point(362, 216);
+        signInButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+        signInButton.Location = new Point(350, 227);
         signInButton.Name = "signInButton";
-        signInButton.Size = new Size(112, 34);
+        signInButton.Size = new Size(135, 41);
         signInButton.TabIndex = 2;
         signInButton.Text = "Sign in";
         signInButton.UseVisualStyleBackColor = true;
@@ -70,11 +75,12 @@ partial class Start
         // 
         errorLabel.Anchor = AnchorStyles.None;
         errorLabel.AutoSize = true;
+        errorLabel.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 238);
         errorLabel.ForeColor = Color.Red;
-        errorLabel.Location = new Point(218, 151);
-        errorLabel.MinimumSize = new Size(400, 10);
+        errorLabel.Location = new Point(194, 143);
+        errorLabel.MinimumSize = new Size(450, 10);
         errorLabel.Name = "errorLabel";
-        errorLabel.Size = new Size(400, 25);
+        errorLabel.Size = new Size(450, 30);
         errorLabel.TabIndex = 3;
         errorLabel.Text = "ErrorLabel";
         errorLabel.TextAlign = ContentAlignment.MiddleCenter;

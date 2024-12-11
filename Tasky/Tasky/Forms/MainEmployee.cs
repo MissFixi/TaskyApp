@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tasky.Forms;
 using Tasky.Objects;
 using TaskyAPI.Models;
 using TaskyAPI.Repositories;
@@ -58,6 +59,12 @@ namespace Tasky
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void AddTask(object sender, EventArgs e)
+        {
+            this.Hide();
+            new AddTaskForm(employee, _tasksRepository, _userRepository, _service).ShowDialog();
         }
     }
 }

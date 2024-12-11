@@ -15,7 +15,7 @@ public partial class Start : Form
     private readonly IUTaskRepository _tasksRepository;
     private readonly IUserRepository _userRepository;
     private Employee employee;
-    
+
     public Start(IUTaskRepository uTaskRepository, IUserRepository userRepository, IUTaskService uTaskService)
     {
         _tasksRepository = uTaskRepository;
@@ -64,4 +64,5 @@ public partial class Start : Form
 
 
     }
+
 }
